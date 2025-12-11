@@ -77,7 +77,7 @@ README.md
 ```
 
 
-## ▶️ Avvio del progetto
+##  Avvio del progetto
 
 ### 1. Installazione dipendenze
 
@@ -93,7 +93,7 @@ pip install pygame
 python gioco.py
 ```
 
-## 🔧 Possibili estensioni
+## Possibili estensioni
 
 * Start/Stop più avanzato → pulsanti grafici anziché tastiera
 * Reset della griglia
@@ -104,6 +104,7 @@ python gioco.py
 * Interfaccia grafica migliorata
 * Modalità "disegno" per attivare/disattivare le celle
 
-## 👨‍💻 Autori
+##  Autori
 
 Zilioli Christian - Alfieri Andrea - Paggi Matteo
+
