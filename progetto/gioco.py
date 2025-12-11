@@ -16,9 +16,9 @@ def aggiornaGriglia():
     """
     nuovaGriglia = []
     global griglia
-    for x in range(len(griglia)):
+    for x in range(celleX):
         riga = []
-        for y in range(len(griglia)):
+        for y in range(celleY):
             vicineVive = 0
             # considero solo le celle che non sono sul bordo
             if 0 < x < len(griglia)-1 and 0 < y < len(griglia[0])-1:
@@ -42,16 +42,16 @@ def aggiornaGriglia():
         nuovaGriglia.append(riga)
     griglia = nuovaGriglia
 
-def disegnaCelle():
+def disegnaCelle(arr):
     """
     Ridisegna tutte le celle sullo schermo in base al loro stato.
     """
-    global griglia
-    for i in range(nCelle):
-        riga = griglia[i]
-        for j in range(nCelle):
+    for i in range(celleX):
+        riga = arr[i]
+        for j in range(celleY):
             cellula = riga[j]
             pygame.draw.rect(screen, cellula.colore, cellula.rettangolo)
+        
         
 def generaCelle():
     """
@@ -60,17 +60,19 @@ def generaCelle():
     Ogni cella viene creata morta (stato 0) e posizionata in una griglia
     regolare usando rettangoli Pygame.
     """
+    arr = []
     x = baseX
     y = baseY
-    for i in range(nCelle):
+    for i in range(celleX):
         riga = []
-        for j in range(nCelle):
-            riga.append(Cellula(0))
+        for j in range(celleY):
+            riga.append(Cellula(0)) #random.randrint(0,1)
             y+=cellWidth+cellSpace
             riga[j].rettangolo = pygame.Rect(x, y, cellWidth, cellWidth)
-        griglia.append(riga)
+        arr.append(riga)
         x+=cellWidth+cellSpace
         y=baseY
+    return arr
 
 class Cellula:
     """
@@ -149,9 +151,9 @@ pygame.display.set_caption("Gioco della vita")
 screen.fill(pygame.Color("gray"))
 clock = pygame.time.Clock()
 
-griglia = []
-generaCelle()
-disegnaCelle()
+griglia = generaCelle()
+savedGriglia = []
+disegnaCelle(griglia)
 
 running = True
 start = False
@@ -181,6 +183,13 @@ while running:
                 start = True
             elif event.key == pygame.K_x: #stop --> x
                 start = False
+            elif event.key == pygame.K_s and not start: #salva una griglia --> s
+                savedGriglia = griglia.copy()
+                print("griglia salvata")
+            elif event.key == pygame.K_a and not start: #stampa la griglia salvata --> a
+                if savedGriglia != []:
+                    griglia = savedGriglia.copy()
+                    disegnaCelle(griglia)
 
     #logica di aggiornamento
     if disegna or cancella:
@@ -196,7 +205,7 @@ while running:
         
     if start == True:
         aggiornaGriglia()
-        disegnaCelle()
+        disegnaCelle(griglia)
             
         
     pygame.display.flip()

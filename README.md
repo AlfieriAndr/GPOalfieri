@@ -36,6 +36,21 @@ Utilità:
 - Permette di creare pattern complessi in modo rapido.
 - Facilita la sperimentazione con diverse configurazioni iniziali.
 
+## Salvataggio e caricamento della configurazione (in memoria)
+
+Il programma permette di **salvare temporaneamente** la configurazione attuale della griglia in memoria e di ripristinarla successivamente.
+
+### Comandi
+| Input | Azione |
+|-------|--------|
+| **S** | Salva lo stato attuale della griglia (`savedGriglia`) |
+| **A** | Ripristina la configurazione salvata e la ridisegna |
+
+### Note
+- Il salvataggio è disponibile **solo con simulazione ferma**.
+- Il salvataggio NON è permanente: viene perso quando il programma viene chiuso.
+- Utile per testare pattern e ritornare rapidamente a uno stato precedente.
+
 ## Regole del Game of Life
 
 Per ogni generazione, ogni cella segue queste regole:
