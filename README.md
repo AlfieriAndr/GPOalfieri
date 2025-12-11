@@ -3,8 +3,6 @@
 Questo progetto è un’implementazione del **Game of Life** di *John Conway*, realizzata in **Python** tramite la libreria **Pygame**.
 L’utente può modificare la configurazione iniziale cliccando sulla griglia e avviare la simulazione secondo le regole classiche dell’automa cellulare.
 
----
-
 ## Funzionalità principali
 
 * Griglia quadrata generata dinamicamente in base alle dimensioni della finestra.
@@ -13,18 +11,30 @@ L’utente può modificare la configurazione iniziale cliccando sulla griglia e 
 * Evoluzione automatica della griglia secondo le regole originali del Game of Life.
 * Visualizzazione grafica tramite Pygame.
 
----
-
 ## Comandi
 
 | Input                     | Azione                                |
 | ------------------------- | ------------------------------------- |
-| **Click sinistro**        | Attiva/disattiva la cella selezionata |
+| **Click sinistro**        | Attiva una cella (viva)                                     |
+| **Click destro**          | Disattiva una cella (morta)                                 |
+| **Trascinamento mouse**   | Modalità disegno/cancellazione                              |
 | **C**                     | Avvia la simulazione                  |
 | **X**                     | Ferma la simulazione                  |
 | **Tasto chiudi finestra** | Termina il programma                  |
 
----
+
+## Modalità disegno
+
+La **modalità disegno** permette di modificare rapidamente la configurazione iniziale trascinando il mouse sulla griglia.
+
+Funzionamento:
+- Tenendo premuto il tasto sinistro si “pennellano” celle vive.
+- Tenendo premuto il tasto destro si cancellano le celle (stato morto).
+- La modalità è attiva solo se la simulazione non è in esecuzione.
+
+Utilità:
+- Permette di creare pattern complessi in modo rapido.
+- Facilita la sperimentazione con diverse configurazioni iniziali.
 
 ## Regole del Game of Life
 
@@ -41,7 +51,6 @@ Per ogni generazione, ogni cella segue queste regole:
 
 L’implementazione si trova nel file `gioco.py` .
 
----
 
 ## Struttura del progetto
 
@@ -52,7 +61,6 @@ L’implementazione si trova nel file `gioco.py` .
 README.md
 ```
 
----
 
 ## ▶️ Avvio del progetto
 
@@ -70,8 +78,6 @@ pip install pygame
 python gioco.py
 ```
 
----
-
 ## 🔧 Possibili estensioni
 
 * Start/Stop più avanzato → pulsanti grafici anziché tastiera
@@ -83,11 +89,6 @@ python gioco.py
 * Interfaccia grafica migliorata
 * Modalità "disegno" per attivare/disattivare le celle
 
----
-
 ## 👨‍💻 Autori
 
 Zilioli Christian - Alfieri Andrea - Paggi Matteo
-
----
-
