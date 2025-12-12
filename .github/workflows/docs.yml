@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 permissions:
-  contents: write   
+  contents: write
 
 jobs:
   build:
@@ -29,14 +29,12 @@ jobs:
 
       - name: Build documentation with pdoc
         run: |
-          mkdir -p docs
-          pdoc --html --output-dir docs --force gioco.py
-          mv docs/gioco/* docs/
-          rmdir docs/gioco
+          rm -rf site
+          mkdir -p site
+          pdoc -o site progetto/gioco.py
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs
-
+          publish_dir: site
