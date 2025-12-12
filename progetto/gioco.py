@@ -127,8 +127,77 @@ class Cellula:
         nuova.colore = self.colore
         nuova.rettangolo = self.rettangolo
         return nuova
-    
 
+def main():
+    global griglia
+    global FPS
+    pygame.init()
+    
+    pygame.display.set_caption("Gioco della vita")
+    screen.fill(pygame.Color("gray"))
+    
+    disegnaCelle(griglia)
+
+    running = True
+    start = False
+    disegna = False
+    cancella = False
+    while running:
+        #gestione eventi tasti
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            
+            #gestione mouse disegno
+            if event.type == pygame.MOUSEBUTTONDOWN and not start:
+                FPS = FPSdisegno
+                if event.button == 1:  # Sinistro --> disegna
+                    disegna = True
+                elif event.button == 3:  # Destro --> cancella
+                    cancella = True
+            elif event.type == pygame.MOUSEBUTTONUP and not start:
+                FPS = FPSgioco
+                cancella = False
+                disegna = False
+            
+            #gestione tasti
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c: #start --> c
+                    start = True
+                elif event.key == pygame.K_x: #stop --> x
+                    start = False
+                elif event.key == pygame.K_s and not start: #salva una griglia --> s
+                    savedGriglia = griglia.copy()
+                    print("griglia salvata")
+                elif event.key == pygame.K_a and not start: #stampa la griglia salvata --> a
+                    if savedGriglia != []:
+                        griglia = savedGriglia.copy()
+                        disegnaCelle(griglia)
+                elif event.key == pygame.K_z and not start:
+                    griglia = generaCelle()
+                    disegnaCelle(griglia)
+
+        #logica di aggiornamento
+        if disegna or cancella:
+            pos = pygame.mouse.get_pos()
+            rect_pos = pygame.Rect(pos[0], pos[1], widthPennello, widthPennello)
+            for i in range(len(griglia)):
+                for j in range(len(griglia[i])):
+                    if griglia[i][j].rettangolo.colliderect(rect_pos):
+                        if disegna: griglia[i][j].viva()
+                        else: griglia[i][j].morta()
+                        pygame.draw.rect(screen, griglia[i][j].colore, griglia[i][j].rettangolo)
+                        print(f"Cella cliccata: ({i}, {j}), Nuovo stato: {griglia[i][j].stato}")
+            
+        if start == True:
+            aggiornaGriglia()
+            disegnaCelle(griglia)
+                
+            
+        pygame.display.flip()
+        clock.tick(FPS)
+
+    pygame.quit()
 
 screenWidth = 800
 screenHeight = 700
@@ -145,73 +214,11 @@ celleX = (screenWidth - baseX) // (cellWidth + cellSpace)
 celleY = (screenHeight - baseY) // (cellWidth + cellSpace)
 nCelle = min(celleX, celleY)
 
-pygame.init()
 screen = pygame.display.set_mode((screenWidth, screenWidth))
-pygame.display.set_caption("Gioco della vita")
-screen.fill(pygame.Color("gray"))
 clock = pygame.time.Clock()
 
 griglia = generaCelle()
 savedGriglia = []
-disegnaCelle(griglia)
 
-running = True
-start = False
-disegna = False
-cancella = False
-while running:
-    #gestione eventi tasti
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        
-        #gestione mouse disegno
-        if event.type == pygame.MOUSEBUTTONDOWN and not start:
-            FPS = FPSdisegno
-            if event.button == 1:  # Sinistro --> disegna
-                disegna = True
-            elif event.button == 3:  # Destro --> cancella
-                cancella = True
-        elif event.type == pygame.MOUSEBUTTONUP and not start:
-            FPS = FPSgioco
-            cancella = False
-            disegna = False
-        
-        #gestione tasti
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_c: #start --> c
-                start = True
-            elif event.key == pygame.K_x: #stop --> x
-                start = False
-            elif event.key == pygame.K_s and not start: #salva una griglia --> s
-                savedGriglia = griglia.copy()
-                print("griglia salvata")
-            elif event.key == pygame.K_a and not start: #stampa la griglia salvata --> a
-                if savedGriglia != []:
-                    griglia = savedGriglia.copy()
-                    disegnaCelle(griglia)
-            elif event.key == pygame.K_z and not start:
-                griglia = generaCelle()
-                disegnaCelle(griglia)
-
-    #logica di aggiornamento
-    if disegna or cancella:
-        pos = pygame.mouse.get_pos()
-        rect_pos = pygame.Rect(pos[0], pos[1], widthPennello, widthPennello)
-        for i in range(len(griglia)):
-            for j in range(len(griglia[i])):
-                if griglia[i][j].rettangolo.colliderect(rect_pos):
-                    if disegna: griglia[i][j].viva()
-                    else: griglia[i][j].morta()
-                    pygame.draw.rect(screen, griglia[i][j].colore, griglia[i][j].rettangolo)
-                    print(f"Cella cliccata: ({i}, {j}), Nuovo stato: {griglia[i][j].stato}")
-        
-    if start == True:
-        aggiornaGriglia()
-        disegnaCelle(griglia)
-            
-        
-    pygame.display.flip()
-    clock.tick(FPS)
-
-pygame.quit()
+if __name__ == "__main__":
+    main()
