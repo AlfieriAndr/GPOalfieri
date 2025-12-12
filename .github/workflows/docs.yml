@@ -22,10 +22,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install documentation tool (pdoc)
+      - name: Install documentation tool (pdoc) and pygame
         run: |
           python -m pip install --upgrade pip
-          pip install pdoc
+          pip install pdoc pygame
+
 
       - name: Build documentation with pdoc
         run: |
