@@ -190,6 +190,9 @@ while running:
                 if savedGriglia != []:
                     griglia = savedGriglia.copy()
                     disegnaCelle(griglia)
+            elif event.key == pygame.K_z and not start:
+                griglia = generaCelle()
+                disegnaCelle(griglia)
 
     #logica di aggiornamento
     if disegna or cancella:
