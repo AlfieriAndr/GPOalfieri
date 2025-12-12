@@ -20,6 +20,9 @@ L’utente può modificare la configurazione iniziale cliccando sulla griglia e 
 | **Trascinamento mouse**   | Modalità disegno/cancellazione                              |
 | **C**                     | Avvia la simulazione                  |
 | **X**                     | Ferma la simulazione                  |
+| **S** | Salva lo stato attuale della griglia |
+| **A** | Ripristina la configurazione salvata e la ridisegna |
+| **Z** | Resetta la griglia |
 | **Tasto chiudi finestra** | Termina il programma                  |
 
 
@@ -37,19 +40,14 @@ Utilità:
 - Facilita la sperimentazione con diverse configurazioni iniziali.
 
 ## Salvataggio e caricamento della configurazione (in memoria)
-
 Il programma permette di **salvare temporaneamente** la configurazione attuale della griglia in memoria e di ripristinarla successivamente.
 
-### Comandi
-| Input | Azione |
-|-------|--------|
-| **S** | Salva lo stato attuale della griglia (`savedGriglia`) |
-| **A** | Ripristina la configurazione salvata e la ridisegna |
+## Reset della griglia
+Il programma permette di **resettare la griglia** tornando allo stato originale rendendo morte tutte le celle.
 
 ### Note
-- Il salvataggio è disponibile **solo con simulazione ferma**.
+- Il salvataggio e il reset sono disponibili **solo con simulazione ferma**.
 - Il salvataggio NON è permanente: viene perso quando il programma viene chiuso.
-- Utile per testare pattern e ritornare rapidamente a uno stato precedente.
 
 ## Regole del Game of Life
 
@@ -96,15 +94,16 @@ python gioco.py
 ## Possibili estensioni
 
 * Start/Stop più avanzato → pulsanti grafici anziché tastiera
-* Reset della griglia
-* Blocco delle celle durante la simulazione
+* ~~Reset della griglia~~
+* ~~Blocco delle celle durante la simulazione~~
 * Aggiunta di pattern predefiniti
-* Salvataggio/caricamento configurazioni
 * Modalità di esecuzione lenta/veloce
+* ~~Salvataggio/caricamento configurazioni~~     
+* ~~Modalità "disegno" per attivare/disattivare le celle~~
 * Interfaccia grafica migliorata
-* Modalità "disegno" per attivare/disattivare le celle
 
 ##  Autori
 
 Zilioli Christian - Alfieri Andrea - Paggi Matteo
+
 
